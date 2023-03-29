@@ -15,4 +15,4 @@ router.register('realstate', RealStateViewSet, basename='realstate', )
 
 urlpatterns = [
     re_path(r'^', include(router.urls)),
-]
+]   

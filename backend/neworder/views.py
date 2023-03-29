@@ -1,6 +1,8 @@
 from rest_framework import viewsets
 from .models import Order, Company, Category, RealStateAgency
 from .serializers import OrderSerializer, CompanySerializer, CategorySerializer, RealStateSerializer
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -28,3 +30,5 @@ class RealStateViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return RealStateAgency.objects.all()
+
+    
