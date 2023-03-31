@@ -134,3 +134,9 @@ CORS_ALLOWED_ORIGINS = [
     'http://192.168.1.16:3000',
     'http://localhost:3000'
 ]
+
+AUTH_USER_MODEL = 'neworder.User'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'neworder.authentication.EmailBackend',
+)
