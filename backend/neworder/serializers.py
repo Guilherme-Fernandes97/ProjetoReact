@@ -1,6 +1,9 @@
 from django.db import models
 from rest_framework import serializers
-from .models import Order, Company, Category, RealStateAgency
+from .models import Order, Company, Category, RealStateAgency, Users
+from django.contrib.auth import authenticate
+
+
 
 class OrderSerializer(serializers.ModelSerializer):
 
@@ -55,4 +58,17 @@ class RealStateSerializer(serializers.ModelSerializer):
             'name',
         )
 
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
 
+    def validate(self, data):
+        user = authenticate(**data)
+        if user and user.is_active:
+            return user
+        raise serializers.ValidationError("Invalid username or password")
+    
+class UsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = ['id', 'name','email', 'active']
